@@ -59,6 +59,26 @@ class UserService {
             return false;
         }
     }
+
+    async getUserInfo() {
+        try {
+            const getUserInfoUrl = config.backendUrl + config.getUserInfoUrl;
+            const response = await axios.get(getUserInfoUrl, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            if (response.data.status === 200) {
+                return response.data;
+            } else {
+                return response.data;
+            }
+        } catch (e) {
+            console.error("User service :: getUserInfo :: error", e);
+            return false;
+        }
+    }
 }
 
 export default new UserService();
